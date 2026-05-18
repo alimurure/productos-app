@@ -1,25 +1,25 @@
 <?php
-
+ 
 namespace Database\Seeders;
-
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+ 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB; // <-- Obligatorio para desactivar llaves foráneas
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // 1. Desactivar temporalmente el chequeo de llaves foráneas
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // 2. Registrar todos los seeders en el orden correcto
+        $this->call([
+            UserSeeder::class,      // Primero usuarios
+            CategoriaSeeder::class,  // Luego categorías (productos dependen de ellas)
+            ProductoSeeder::class,
         ]);
+
+        // 3. Reactivar el chequeo de llaves foráneas
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
