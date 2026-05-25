@@ -11,7 +11,7 @@ class Producto extends Model
  
     protected $table = 'productos';
     protected $primaryKey = 'id_producto';
-    protected $fillable = ['nombre', 'marca', 'precio', 'stock', 'id_categoria'];
+    protected $fillable = ['nombre', 'marca', 'precio', 'stock', 'id_categoria','foto'];
  
     // Relación: Un producto pertenece a una categoría
     public function categoria()

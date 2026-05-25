@@ -19,3 +19,10 @@ class ProductoController extends Controller
         return view('productos.index', compact('productos'));
     }
 }
+
+// Muestra la galeria de productos con fotos
+public function galeria()
+{
+    $productos = Producto::with('categoria')->get();
+    return view('productos.galeria', compact('productos'));
+}

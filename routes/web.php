@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CarritoController;
 use App\Models\Categoria;
 use App\Models\Producto;
  
@@ -40,3 +41,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
  
 });
+
+// Dentro de Route::middleware('auth')->group(function () { ... })
+ 
+// Galeria de productos (vista en tarjetas con foto)
+Route::get('/galeria', [ProductoController::class, 'galeria'])->name('productos.galeria');
+ 
+// Detalle de un producto especifico
+Route::get('/productos/{id}', [ProductoController::class, 'show'])->name('productos.show');
+ 
+// Rutas del carrito (se agregan en el Paso 6)
+Route::get('/carrito',                 [CarritoController::class, 'index'])->name('carrito.index');
+Route::post('/carrito/agregar/{id}',   [CarritoController::class, 'agregar'])->name('carrito.agregar');
+Route::post('/carrito/quitar/{id}',    [CarritoController::class, 'quitar'])->name('carrito.quitar');
+Route::post('/carrito/vaciar',         [CarritoController::class, 'vaciar'])->name('carrito.vaciar');
