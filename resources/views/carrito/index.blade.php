@@ -85,12 +85,15 @@
                     Vaciar carrito
                 </button>
             </form>
+            
             <div style="font-size:1.3rem; font-weight:700; color:var(--primary)">
                 Total: S/. {{ number_format($total, 2) }}
             </div>
-            <button class="btn btn-primary" onclick="alert('Funcion de pago no implementada aun.')">
+            
+            {{-- [CONECTADO RETO 4] Redirige directo a la vista de confirmación procesando el pedido --}}
+            <a href="{{ route('carrito.confirmacion') }}" class="btn btn-primary" style="text-decoration: none; display: inline-flex; align-items: center;">
                 Proceder al pago
-            </button>
+            </a>
         </div>
     </div>
 @endif
