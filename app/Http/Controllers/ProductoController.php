@@ -2,27 +2,23 @@
  
 namespace App\Http\Controllers;
  
-use Illuminate\Http\Request;
 use App\Models\Producto;
+use App\Models\Categoria;
+use Illuminate\Http\Request;
  
 class ProductoController extends Controller
 {
-    /**
-     * Muestra la lista de todos los productos con su categoría.
-     */
+    // Muestra la lista de todos los productos
     public function index()
     {
-        // Obtiene todos los productos e incluye su categoría relacionada
         $productos = Producto::with('categoria')->get();
- 
-        // Retorna la vista y le pasa la variable $productos
         return view('productos.index', compact('productos'));
     }
-}
-
-// Muestra la galeria de productos con fotos
-public function galeria()
-{
-    $productos = Producto::with('categoria')->get();
-    return view('productos.galeria', compact('productos'));
+ 
+    // Muestra el detalle de un producto especifico
+    public function show($id)
+    {
+        $producto = Producto::with('categoria')->findOrFail($id);
+        return view('productos.show', compact('producto'));
+    }
 }
